@@ -11,25 +11,28 @@ resource "aws_instance" "app_instance"{
   associate_public_ip_address = true
   subnet_id = "${aws_subnet.Len_Subnet_Pub.id}"
   vpc_security_group_ids = ["${aws_security_group.lba_sg.id}"]
-  key_name = "len_terra"
+  key_name = "len_terra2"
   user_data = "${data.template_file.app_instance.rendered}"
   tags = {
     Name = "${var.name}"
   }
 }
 
+
 ## Public Subnet
 
 resource "aws_subnet" "Len_Subnet_Pub"{
   vpc_id = "vpc-0cf6f02e305e95b7e"
 
-  cidr_block = "10.10.12.7/24"
+  cidr_block = "10.10.60.4/24"
 
   tags = {
     Name = "Len-Pub-Subnet"
     Cohort = "Eng-42"
   }
 }
+
+
 
 ## Create Security Group
 
@@ -57,7 +60,7 @@ resource "aws_security_group" "lba_sg" {
     from_port = 22
     to_port = 22
     protocol = "tcp"
-    cidr_blocks = ["212.161.55.68/32", "5.81.116.80/32"]
+    cidr_blocks = ["10.10.71.0/24"]
   }
 
 
@@ -66,6 +69,8 @@ resource "aws_security_group" "lba_sg" {
     Cohort = "Eng42"
   }
 }
+
+
 
 ## Create Route Table
 
@@ -93,6 +98,8 @@ data "aws_internet_gateway" "default"{
   }
 
 
+
+
 # Route Table Association
 resource "aws_route_table_association" "assoc"{
   subnet_id = "${aws_subnet.Len_Subnet_Pub.id}"
@@ -106,7 +113,8 @@ data "template_file" "app_instance"{
   template = "${file("./scripts/app/init.sh.tpl")}"
 }
 
-resource "aws_key_pair" "deployer" {
-  key_name   = "len_terra"
-  public_key = "${var.ssh_terra}"
+
+resource "aws_key_pair" "deployer2" {
+  key_name   = "len_terra2"
+  public_key = "${var.len_terra2}"
 }
