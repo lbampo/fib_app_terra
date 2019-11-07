@@ -22,9 +22,9 @@ resource "aws_instance" "app_instance"{
 ## Public Subnet
 
 resource "aws_subnet" "Len_Subnet_Pub"{
-  vpc_id = "vpc-0cf6f02e305e95b7e"
+  vpc_id = "vpc-07e47e9d90d2076da"
 
-  cidr_block = "10.10.60.4/24"
+  cidr_block = "172.31.8.0/24"
 
   tags = {
     Name = "Len-Pub-Subnet"
@@ -40,7 +40,7 @@ resource "aws_subnet" "Len_Subnet_Pub"{
 resource "aws_security_group" "lba_sg" {
   name = "LenLen Destroy SG"
   description = "aws SG from terraform"
-  vpc_id = "vpc-0cf6f02e305e95b7e"
+  vpc_id = "vpc-07e47e9d90d2076da"
 
   ingress{
     from_port = 80
@@ -60,7 +60,7 @@ resource "aws_security_group" "lba_sg" {
     from_port = 22
     to_port = 22
     protocol = "tcp"
-    cidr_blocks = ["10.10.71.0/24"]
+    cidr_blocks = ["172.31.78.0/24"]
   }
 
 

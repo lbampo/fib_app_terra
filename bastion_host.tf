@@ -16,9 +16,9 @@ resource "aws_instance" "bastion_instance"{
 ## Bastion Subnet
 
 resource "aws_subnet" "Len_Bas_Subnet"{
-  vpc_id = "vpc-0cf6f02e305e95b7e"
+  vpc_id = "vpc-07e47e9d90d2076da"
 
-  cidr_block = "10.10.71.0/24"
+  cidr_block = "172.31.78.0/24"
 
   tags = {
     Name = "Len-Bas-Subnet"
@@ -31,20 +31,20 @@ resource "aws_subnet" "Len_Bas_Subnet"{
 resource "aws_security_group" "bastion_sg" {
   name = "BasBas Destroy SG"
   description = "bastion SG from terraform"
-  vpc_id = "vpc-0cf6f02e305e95b7e"
+  vpc_id = "vpc-07e47e9d90d2076da"
 
   ingress{
     from_port = 22
     to_port = 22
     protocol = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["212.161.55.68/32"]
   }
 
   egress{
   from_port = 22
   to_port = 22
   protocol = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
+  cidr_blocks = ["172.31.8.0/24"]
   }
 
   tags = {
